@@ -1,0 +1,6 @@
+// _helper.scss
+
+// function to change pixel units to rem units
+@function rem($px) {
+  @return calc($px / 16px) * 1rem;
+}

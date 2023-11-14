@@ -1,0 +1,9 @@
+// Movies.module.scss
+@import "../../SCSS/helper";
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: rem(20px);
+  padding: rem(20px);
+}
