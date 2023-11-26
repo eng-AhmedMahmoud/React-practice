@@ -4,13 +4,15 @@ import { MovieInterface } from "../interfaces/MovieInterface";
 
 interface MovieListProps {
     movies: MovieInterface[];
+    loading: boolean;
     onChange: (movie: MovieInterface, shelf: string) => void;
 }
 
 const MoviesList = (props: MovieListProps) => {
-    const { movies, onChange } = props;
-    console.log(movies)
-    return (
+    const { movies, onChange, loading } = props;
+    return loading ? (
+        <div>Loading...</div>
+    ) : (
         <div className="list-movies">
             <div className="list-movies-title">
                 <h1>MyMovies</h1>
@@ -30,20 +32,20 @@ const MoviesList = (props: MovieListProps) => {
                     <MovieShelf
                         movies={
                             movies?.filter(
-                                (movie) => movie.shelf === "watched"
+                                (movie) => movie.shelf === "wantToWatch"
                             ) ?? []
                         }
-                        title="Watched"
+                        title="Want to watch"
                         handleChange={onChange}
                     />
 
                     <MovieShelf
                         movies={
                             movies?.filter(
-                                (movie) => movie.shelf === "wantToWatch"
+                                (movie) => movie.shelf === "watched"
                             ) ?? []
                         }
-                        title="Want to watch"
+                        title="Watched Movies"
                         handleChange={onChange}
                     />
                 </div>

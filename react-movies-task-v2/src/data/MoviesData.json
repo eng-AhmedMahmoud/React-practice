@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "shelf": "currentlyWatching",
+      "shelf": "wantToWatch",
       "image": "https://source.unsplash.com/featured/?movie",
       "title": "Movie 2",
       "description": "This is the second movie"
@@ -44,28 +44,28 @@
     },
     {
       "id": 7,
-      "shelf": "wantToWatch",
+      "shelf": "watched",
       "image": "https://source.unsplash.com/featured/?comedy",
       "title": "Movie 7",
       "description": "This is the seventh movie"
     },
     {
       "id": 8,
-      "shelf": "none",
+      "shelf": "currentlyWatching",
       "image": "https://source.unsplash.com/featured/?romance",
       "title": "Movie 8",
       "description": "This is the eighth movie"
     },
     {
       "id": 9,
-      "shelf": "none",
+      "shelf": "wantToWatch",
       "image": "https://source.unsplash.com/featured/?thriller",
       "title": "Movie 9",
       "description": "This is the ninth movie"
     },
     {
       "id": 10,
-      "shelf": "none",
+      "shelf": "watched",
       "image": "https://source.unsplash.com/featured/?horror",
       "title": "Movie 10",
       "description": "This is the tenth movie"

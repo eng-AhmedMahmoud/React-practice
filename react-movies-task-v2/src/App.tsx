@@ -8,59 +8,60 @@ import { MovieInterface } from "./interfaces/MovieInterface";
 import "./scss/App.scss";
 
 const MoviesApp = () => {
-  const [allMovies, setAllMovies] = useState<MovieInterface[]>([]);
+    const [allMovies, setAllMovies] = useState<MovieInterface[]>([]);
+    const [loading, setLoading] = useState(true);
 
- 
-  const fetchMovies = async () => {
-    try {
-      const movies = await MoviesAPI.getAllMovies();
-      console.log(movies);
-      setAllMovies(movies);
-    } catch (error) {
-      console.error("Failed to fetch movies:", error);
-    }
-  };
+    const fetchMovies = async () => {
+        try {
+            setLoading(true);
+            const movies = await MoviesAPI.getAllMovies();
+            setAllMovies(movies);
+            setLoading(false);
+        } catch (error) {
+            console.error("Failed to fetch movies:", error);
+        }
+    };
 
-   useEffect(() => {
-       fetchMovies();
-   }, []);
+    useEffect(() => {
+        fetchMovies();
+    }, []);
 
-  const updateMovies = async (movie: MovieInterface, shelf: string) => {
-    try {
-      await MoviesAPI.updateMovie(movie, shelf);
-      fetchMovies();
-    } catch (error) {
-      console.error("Failed to update movies:", error);
-    }
-  };
-console.log(allMovies)
-  return (
-      <Router>
-          <div className="app">
-              <Routes>
-                  <Route
-                      path="/"
-                      element={
-                          <MovieList
-                              movies={allMovies}
-                              onChange={updateMovies}
-                          />
-                      }
-                  />
-                  <Route
-                      path="/search"
-                      element={
-                          <MovieSearch
-                              onChange={updateMovies}
-                              searchableMovies={allMovies}
-                          />
-                      }
-                  />
-                  <Route path="*" element={<ErrorPage />} />
-              </Routes>
-          </div>
-      </Router>
-  );
+    const updateMovies = async (movie: MovieInterface, shelf: string) => {
+        try {
+            await MoviesAPI.updateMovie(movie, shelf).then(() => fetchMovies())
+        } catch (error) {
+            console.error("Failed to update movies:", error);
+        }
+    };
+    
+    return (
+        <Router>
+            <div className="app">
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <MovieList
+                                movies={allMovies}
+                                loading={loading}
+                                onChange={updateMovies}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/search"
+                        element={
+                            <MovieSearch
+                                onChange={updateMovies}
+                                searchableMovies={allMovies}
+                            />
+                        }
+                    />
+                    <Route path="*" element={<ErrorPage />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 };
 
 export default MoviesApp;
